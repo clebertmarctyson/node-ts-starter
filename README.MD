@@ -2,180 +2,138 @@
 
 ![Node-TS-Starter Banner](./assets/node-ts-starter-banner.png)
 
-A modern, minimal Node.js starter template with TypeScript, Jest testing, and essential tooling pre-configured.
+A clean, modern Node.js starter template with TypeScript, Jest testing, and path aliases pre-configured for rapid development.
 
 ## ✨ Features
 
-- **TypeScript** - Full TypeScript support with modern ES features
-- **Testing** - Jest testing framework with TypeScript support
+- **TypeScript** - Full TypeScript support with strict type checking
+- **Jest Testing** - Complete test setup with TypeScript integration
 - **Hot Reload** - Fast development with `tsx` watch mode
-- **Path Mapping** - Clean imports with `@/*` path aliases
-- **Environment Variables** - Built-in `.env` file support
-- **Modern Tooling** - Configured for modern JavaScript/TypeScript development
-- **PNPM Ready** - Optimized for PNPM package manager
+- **Path Aliases** - Clean imports using `@/*` mapping
+- **Environment Variables** - Native `.env` support via `--env-file`
+- **Zero Config** - Ready to use out of the box
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-
-- Node.js 18+ 
-- PNPM (recommended) or npm/yarn
+- Node.js 18+
+- PNPM (recommended)
 
 ### Installation
+```bash
+git clone <your-repo-url> my-project
+cd my-project
+pnpm install
+```
 
-1. **Clone or download this template**
-   ```bash
-   # Using git
-   git clone <your-repo-url>
-   cd node-ts-starter
-   
-   # Or create from template
-   npx create-node-ts-starter my-project
-   ```
+### Setup
+```bash
+# Copy environment template
+cp .env.example .env
 
-2. **Install dependencies**
-   ```bash
-   pnpm install
-   ```
-
-3. **Create environment file**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-4. **Start development**
-   ```bash
-   pnpm dev
-   ```
+# Start development
+pnpm dev
+```
 
 ## 📁 Project Structure
 
 ```
-node-ts-starter/
-├── src/
-│   ├── index.ts          # Main entry point
-│   ├── lib/              # Utility functions and modules
-│   │   └── math.ts       # Example utility module
-│   └── tests/            # Test files
-│       └── index.test.ts # Example tests
-├── .env.example          # Environment variables template
-├── jest.config.ts        # Jest testing configuration
-├── tsconfig.json         # TypeScript configuration
-└── package.json          # Project dependencies and scripts
+src/
+├── index.ts              # Main entry point
+├── lib/                  # Utility functions
+│   └── math.ts          # Example utilities
+└── tests/               # Test files
+    └── index.test.ts    # Example tests
 ```
 
-## 🛠️ Available Scripts
+## 🛠️ Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server with hot reload |
-| `pnpm test` | Run test suite |
+| Script | Description |
+|--------|-------------|
+| `pnpm dev` | Development server with hot reload |
+| `pnpm build` | Build for production |
+| `pnpm start` | Run production build |
+| `pnpm test` | Run tests |
 | `pnpm test:watch` | Run tests in watch mode |
-| `pnpm build` | Build for production (add build script as needed) |
 
-## ⚙️ Configuration
+## ⚙️ Key Features
 
-### TypeScript Configuration
+### Path Aliases
+Use clean imports throughout your project:
+```typescript
+// Instead of relative paths
+import { add } from '../../../lib/math';
 
-The project uses modern TypeScript configuration with:
-- ES Next target and modules
-- Path mapping (`@/*` → `./src/*`)
-- Strict type checking
-- Decorator support
-
-### Jest Testing
-
-- Full TypeScript support via `ts-jest`
-- Path mapping support
-- Coverage collection configured
-- Test files: `*.test.ts` or `*.spec.ts`
+// Use clean aliases
+import { add } from '@/lib/math';
+```
 
 ### Environment Variables
-
-Create a `.env` file in the root directory:
-
+The project uses Node.js native `--env-file` support:
 ```bash
-# Example environment variables
+# .env
 PORT=3000
-NODE_ENV=development
-DATABASE_URL=your_database_url_here
-API_KEY=your_api_key_here
 ```
 
-Access in your code:
 ```typescript
+// Access in code
 console.log(process.env.PORT); // 3000
 ```
 
-## 📝 Usage Examples
-
-### Adding New Modules
-
-1. Create your module in `src/lib/`:
-   ```typescript
-   // src/lib/api.ts
-   export const fetchData = async (url: string) => {
-     // Your implementation
-   };
-   ```
-
-2. Import using path mapping:
-   ```typescript
-   // src/index.ts
-   import { fetchData } from '@/lib/api';
-   ```
-
-### Writing Tests
-
+### Testing
+Write tests using Jest with full TypeScript support:
 ```typescript
-// src/tests/api.test.ts
 import { describe, expect, test } from '@jest/globals';
-import { fetchData } from '@/lib/api';
+import { add } from '@/lib/math';
 
-describe('API', () => {
-  test('fetchData should return data', async () => {
-    const result = await fetchData('https://api.example.com');
-    expect(result).toBeDefined();
+describe('Math utilities', () => {
+  test('should add numbers correctly', () => {
+    expect(add(2, 3)).toBe(5);
   });
 });
 ```
 
-## 🏗️ Building for Production
+## 🏗️ Production Build
 
-Add build script to `package.json`:
-```json
-{
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js"
-  }
-}
-```
-
-Then build and run:
 ```bash
+# Compile TypeScript with path resolution
 pnpm build
+
+# Run production server
 pnpm start
 ```
+
+The build process uses `tsc-alias` to resolve path mappings in the compiled JavaScript.
+
+## 📝 Development
+
+### Adding New Features
+1. Create your module in `src/lib/`
+2. Add tests in `src/tests/`
+3. Import using `@/` aliases
+4. Run `pnpm test` to verify
+
+### Project Configuration
+- **TypeScript**: Configured for strict mode with ES modules
+- **Jest**: Set up with `ts-jest` and path mapping support
+- **Environment**: Native Node.js `--env-file` integration
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) file for details.
 
-## 🛟 Support
+## 👨‍💻 Author
 
-If you find this starter helpful, please ⭐ star the repository!
-
-For questions or issues, please [open an issue](https://github.com/your-username/node-ts-starter/issues).
+**Marc Tyson CLEBERT**  
+📧 [contact@marctysonclebert.com](mailto:contact@marctysonclebert.com)
 
 ---
 
