@@ -13,6 +13,7 @@ Built with modern TypeScript, comprehensive testing, and developer-friendly tool
 🔥 **Hot Reload** - See changes instantly with `tsx` magic  
 📁 **Smart Imports** - Clean `@/*` paths instead of `../../../hell`  
 🌍 **Environment Sync** - Native `.env` support that just works  
+🧹 **Auto Cleanup** - Smart script to prepare your project in seconds  
 ⚡ **Zero Setup** - Clone, install, code. That's it.
 
 ## 🚀 Get Started in 30 Seconds
@@ -24,10 +25,10 @@ npx degit clebertmarctyson/node-ts-starter my-awesome-project
 # 📂 Jump in
 cd my-awesome-project
 
-# 🔧 Setup environment
-cp .env.example .env
+# 🧹 Clean up template files (optional but recommended)
+pnpm clean
 
-# 📦 Install dependencies
+# 📦 Install dependencies (if you didn't install during cleanup)
 pnpm install
 
 # 🎉 Start building!
@@ -35,6 +36,36 @@ pnpm dev
 ```
 
 **Boom!** Your TypeScript server is running with hot reload. Time to build something amazing! 🎯
+
+## 🧹 Smart Project Cleanup
+
+The included `pnpm clean` command intelligently prepares your project:
+
+- ✅ Auto-names your project based on folder name
+- 🗑️ Removes example files (like `src/lib/math.ts`)
+- 🧪 Optionally removes test setup if you don't need it
+- 📦 Optionally installs dependencies for you
+- 📝 Clears README.md for your own documentation
+- ⚙️ Sets up `.env` file from `.env.example`
+
+**Just answer two simple questions and you're ready to go!**
+
+```bash
+pnpm clean
+
+# Keep tests? (y/n): n
+# 
+# Deleted: jest.config.ts
+# Deleted: tests/
+# Deleted: pnpm-lock.yaml
+# Deleted: src/lib/math.ts
+# 
+# Install packages? (y/n): y
+# 
+# Installing packages...
+# 
+# ✨ Done!
+```
 
 ## 📁 Project Structure
 
@@ -48,6 +79,7 @@ pnpm dev
 │       └── ✅ index.test.ts    # Example tests
 ├── 🖼️ assets/                   # Static files
 ├── ⚙️ .env.example              # Environment template
+├── 🧹 clean.ts                  # Project cleanup script
 └── 📋 package.json              # Project config
 ```
 
@@ -55,6 +87,7 @@ pnpm dev
 
 | 🎯 Command | 📝 What it does |
 |------------|----------------|
+| `pnpm clean` | 🧹 Prepare your project for development |
 | `pnpm dev` | 🔥 Development server with instant hot reload |
 | `pnpm build` | 🏗️ Production build with path resolution |
 | `pnpm start` | 🚀 Run your compiled production app |
@@ -153,12 +186,14 @@ pnpm add lodash date-fns zod
 - 📁 **Clean Architecture** - Organized file structure
 - 🔄 **Hot Reload** - Instant feedback loop
 - 🌍 **Environment Safety** - Secure config management
+- 🧹 **Quick Setup** - One command to prepare your project
 
 ### 🚀 Productivity Boosters
-1. **Use path aliases everywhere** - `@/lib/utils` is cleaner than `../../../lib/utils`
-2. **Write tests first** - `pnpm test:watch` for TDD workflow
-3. **Leverage TypeScript** - Let the compiler catch bugs for you
-4. **Keep it simple** - This template has everything you need, nothing you don't
+1. **Run cleanup first** - `pnpm clean` sets up everything in one go
+2. **Use path aliases everywhere** - `@/lib/utils` is cleaner than `../../../lib/utils`
+3. **Write tests first** - `pnpm test:watch` for TDD workflow
+4. **Leverage TypeScript** - Let the compiler catch bugs for you
+5. **Keep it simple** - This template has everything you need, nothing you don't
 
 ## 🤝 Join the Community
 
