@@ -10,7 +10,7 @@
     "start": "node --env-file=.env dist/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean": "node clean.ts"
+    "clean": "node clean.cjs"
   },
   "keywords": [
     "typescript",
